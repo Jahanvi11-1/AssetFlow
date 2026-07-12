@@ -1,0 +1,376 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AssetFlow ERP - Asset Audit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#ffdbcb",
+            "tertiary-container": "#e09976",
+            "secondary-container": "#f4deac",
+            "inverse-surface": "#382f1f",
+            "error": "#ba1a1a",
+            "surface-container-high": "#f7e6ce",
+            "secondary": "#6c5d36",
+            "on-primary-fixed-variant": "#424b1f",
+            "on-background": "#221a0c",
+            "primary-container": "#a5af79",
+            "on-surface": "#221a0c",
+            "surface-container-low": "#fff2e1",
+            "on-primary-container": "#3a4217",
+            "on-secondary-container": "#716139",
+            "surface-bright": "#fff8f3",
+            "on-secondary": "#ffffff",
+            "status-inactive": "#D1C7B7",
+            "secondary-fixed-dim": "#dac495",
+            "surface": "#fff8f3",
+            "sidebar-text": "#FDF9F3",
+            "surface-container": "#fcecd4",
+            "secondary-fixed": "#f7e0af",
+            "error-container": "#ffdad6",
+            "outline": "#77786b",
+            "on-secondary-fixed": "#241a00",
+            "surface-tint": "#5a6334",
+            "inverse-on-surface": "#ffeed7",
+            "inverse-primary": "#c2cc93",
+            "surface-card": "#FFFFFF",
+            "on-error-container": "#93000a",
+            "surface-variant": "#f1e0c9",
+            "on-tertiary-container": "#623115",
+            "background": "#fff8f3",
+            "status-error": "#D97B7B",
+            "primary-fixed-dim": "#c2cc93",
+            "on-surface-variant": "#46483d",
+            "primary-fixed": "#dee8ad",
+            "on-secondary-fixed-variant": "#534520",
+            "on-primary": "#ffffff",
+            "status-active": "#A5AF79",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#895032",
+            "tertiary-fixed-dim": "#ffb692",
+            "primary": "#5a6334",
+            "on-primary-fixed": "#181e00",
+            "surface-container-highest": "#f1e0c9",
+            "on-tertiary-fixed-variant": "#6d391d",
+            "on-error": "#ffffff",
+            "surface-dim": "#e8d8c1",
+            "outline-variant": "#c7c7b9",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#341100"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-max": "1440px",
+            "margin-mobile": "16px",
+            "sidebar-width": "260px",
+            "base": "8px",
+            "margin-desktop": "40px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "label-caps": ["JetBrains Mono"],
+            "body-sm": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "display": ["Hanken Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "label-ui": ["Hanken Grotesk"],
+            "headline-md": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-ui": ["14px", {"lineHeight": "16px", "fontWeight": "500"}],
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #fff8f3;
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Side Navigation Bar -->
+<aside class="w-sidebar-width h-full fixed left-0 top-0 bg-secondary dark:bg-inverse-surface flex flex-col p-4 gap-2 shadow-sm z-50">
+<div class="mb-8 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-sidebar-text">AssetFlow</h1>
+<p class="font-label-ui text-label-ui text-sidebar-text opacity-60">Enterprise ERP</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto scrollbar-hide">
+<!-- Nav Items from JSON Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-body-md text-body-md">Organization Setup</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md text-body-md">Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="font-body-md text-body-md">Allocation &amp; Transfers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">event_seat</span>
+<span class="font-body-md text-body-md">Resource Booking</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-body-md text-body-md">Maintenance</span>
+</a>
+<!-- Active State Logic applied to 'Audit' based on current screen -->
+<a class="flex items-center gap-3 px-4 py-3 bg-status-active text-on-primary rounded-xl transition-all duration-200 scale-95 active:scale-90 shadow-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+<span class="font-body-md text-body-md">Audit</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md text-body-md">Notifications</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-sidebar-text/10">
+<a class="flex items-center gap-3 px-4 py-3 text-sidebar-text opacity-70 hover:opacity-100 hover:bg-surface-container-highest/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="h-16 fixed top-0 right-0 left-sidebar-width flex items-center justify-between px-margin-desktop bg-background/80 backdrop-blur-md z-40 border-b border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl pl-10 pr-4 py-2 font-body-sm focus:ring-2 focus:ring-primary/20" placeholder="Search audits, assets or tags..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative p-2 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="font-label-ui text-label-ui text-on-surface font-bold">Admin User</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Super Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-container group-hover:scale-105 transition-transform object-cover" data-alt="A professional headshot of a middle-aged male administrator in a clean office setting. He is wearing a crisp white shirt and has a welcoming expression. The lighting is bright and even, matching a warm corporate ERP aesthetic. The background features a soft-focus office with minimalist warm wood furniture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDfeugAFJtIYoB9MZXlQZDYme-XOaG-vEvv2pfualWSsSE758wikg3zCMc0ohHTkbmIJHTgEvTo1L4cOBEwT618X2kTnhDIuleTdJmAB-Nk_P7DobJ-HJtqvjhm04xtBju4T6zL1c53nVpK3Cga8BXPXthauF5hFIulGq0quypP7XjtkYReF_TXaA_fmig7mYsyFkcmzNB657VeG9Ow0zYrov9YDCw_BQ0skdVo6aH-8mAk1HtLnDo">
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width pt-16 min-h-screen">
+<div class="p-margin-desktop max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant font-label-caps text-label-caps rounded">ACTIVE CYCLE</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Asset Audit</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Verification and reconciliation of physical assets across departments.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-3 bg-surface-container-highest text-on-surface font-label-ui text-label-ui rounded-xl hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">file_download</span>
+            Export Partial Report
+          </button>
+<button class="px-6 py-3 bg-primary-container text-on-primary-container font-label-ui text-label-ui rounded-xl hover:opacity-90 transition-all shadow-md flex items-center gap-2 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+            Save Progress
+          </button>
+</div>
+</div>
+<!-- Bento Grid for Audit Context -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-gutter">
+<!-- Audit Information Card -->
+<div class="bg-surface-card rounded-xl p-8 shadow-sm md:col-span-12">
+<div class="flex items-start justify-between mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Q3 Audit: <span class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">Engineering Dept <span class="material-symbols-outlined text-sm">expand_more</span></span> - <span class="inline-flex items-center gap-1 cursor-pointer hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">calendar_today</span> 1-15 Jul</span></h3>
+<div class="flex items-center gap-2 font-body-md text-body-md text-on-surface-variant cursor-pointer hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">check_box</span> Auditors: A. Rao, S. Iqbal <span class="material-symbols-outlined text-sm">expand_more</span></div>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">PROGRESS</p>
+<div class="flex items-center gap-3">
+<span class="font-headline-md text-headline-md text-primary font-bold">80%</span>
+<div class="w-32 h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert Panel -->
+<div class="flex items-center gap-4 p-5 bg-tertiary-fixed/30 border border-tertiary-container/30 rounded-xl mb-8 animate-pulse">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-ui text-label-ui text-on-tertiary-container font-bold">DISCREPANCY ALERT</h4>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">2 assets flagged - discrepancy report generated automatically. Review is required before closing the cycle.</p>
+</div>
+<button class="px-4 py-2 bg-on-tertiary-container text-white rounded-lg text-label-ui">Review Now</button>
+</div>
+<!-- Asset Verification Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-2">
+<thead>
+<tr>
+<th class="px-4 py-2 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">Asset</th>
+<th class="px-4 py-2 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">Expected Location</th>
+<th class="px-4 py-2 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">Verification</th>
+
+</tr>
+</thead>
+<tbody>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">laptop_mac</span>
+</div>
+<div>
+<p class="font-label-ui text-label-ui text-on-surface font-bold">AF-003 Dell laptop</p>
+<p class="text-[12px] text-on-surface-variant">Engineering / Workstation</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">location_on</span>
+<span class="font-body-sm text-body-sm">Desk E12</span>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<span class="inline-flex items-center px-3 py-1 bg-status-active text-on-primary text-[11px] font-bold uppercase tracking-widest rounded-full shadow-sm">Verified</span>
+</td>
+
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">chair</span>
+</div>
+<div>
+<p class="font-label-ui text-label-ui text-on-surface font-bold">AF-9921 Office chair</p>
+<p class="text-[12px] text-on-surface-variant">Engineering / Ergonomic</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">location_on</span>
+<span class="font-body-sm text-body-sm">Desk E14</span>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<span class="inline-flex items-center px-3 py-1 bg-error-container text-error text-[11px] font-bold uppercase tracking-widest rounded-full shadow-sm">Missing</span>
+</td>
+
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">desktop_windows</span>
+</div>
+<div>
+<p class="font-label-ui text-label-ui text-on-surface font-bold">AF-9838 Monitor</p>
+<p class="text-[12px] text-on-surface-variant">Engineering / Ultra-wide</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">location_on</span>
+<span class="font-body-sm text-body-sm">Desk E15</span>
+</div>
+</td>
+<td class="px-4 py-4 align-middle">
+<span class="inline-flex items-center px-3 py-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-widest rounded-full shadow-sm">Damaged</span>
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Action -->
+<div class="mt-10 pt-8 border-t border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-card bg-surface-container flex items-center justify-center text-[10px] font-bold">AR</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-card bg-surface-container flex items-center justify-center text-[10px] font-bold">SI</div>
+</div>
+<p class="font-body-sm text-body-sm">Active auditors on site</p>
+</div>
+<button class="px-10 py-4 bg-secondary text-on-secondary font-headline-md text-headline-md rounded-xl hover:opacity-90 transition-all shadow-xl active:scale-95">
+              Close audit cycle
+            </button>
+</div>
+</div>
+<!-- Sidebar Summary Cards -->
+
+</div>
+</div>
+</main>
+<script>
+    // Simple micro-interactions
+    document.querySelectorAll('button, a').forEach(el => {
+      el.addEventListener('mousedown', () => {
+        el.classList.add('scale-95');
+      });
+      el.addEventListener('mouseup', () => {
+        el.classList.remove('scale-95');
+      });
+      el.addEventListener('mouseleave', () => {
+        el.classList.remove('scale-95');
+      });
+    });
+
+    // Theme toggler placeholder (for demonstration)
+    const toggleTheme = () => {
+      document.documentElement.classList.toggle('dark');
+    };
+  </script>
+
+
+</body></html>
