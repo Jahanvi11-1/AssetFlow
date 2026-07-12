@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssetFlow Enterprise - Asset & Resource Management System</title>
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- App Container -->
+    <div id="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" style="display: none;">
+            <div class="sidebar-header">
+                <div class="logo-icon">AF</div>
+                <div class="logo-text">AssetFlow</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#/dashboard" class="nav-item active" data-route="dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#/assets" class="nav-item" data-route="assets">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>Asset Registry</span>
+                </a>
+                <a href="#/allocations" class="nav-item" data-route="allocations">
+                    <i class="fa-solid fa-right-left"></i>
+                    <span>Allocations</span>
+                </a>
+                <a href="#/bookings" class="nav-item" data-route="bookings">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Bookings</span>
+                </a>
+                <a href="#/maintenance" class="nav-item" data-route="maintenance">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Maintenance</span>
+                </a>
+                <a href="#/audits" class="nav-item" data-route="audits">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <span>Audit</span>
+                </a>
+                <a href="#/reports" class="nav-item" data-route="reports">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#/org" class="nav-item" data-route="org">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span>Organization</span>
+                </a>
+                <a href="#/logs" class="nav-item" data-route="logs">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Notification</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer" id="sidebar-user-profile">
+                <div class="user-avatar" id="profile-avatar">??</div>
+                <div class="user-info">
+                    <div class="user-name" id="profile-name">Guest User</div>
+                    <div class="user-role" id="profile-role">LOADING</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div id="main-container">
+            <!-- Header Top Bar -->
+            <header id="top-bar" style="display: none;">
+                <h1 class="page-title" id="page-title-label">Dashboard</h1>
+                <div class="top-bar-actions">
+                    <div class="notification-badge" id="btn-notifications-view" onclick="window.location.hash='#/logs'">
+                        <i class="fa-regular fa-bell fa-lg"></i>
+                        <div class="badge-dot" id="unread-notifications-dot" style="display: none;"></div>
+                    </div>
+                    <button class="btn btn-outline" id="btn-logout" style="padding: 6px 12px; font-size: 13px;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Canvas -->
+            <main id="content-canvas">
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                    <i class="fa-solid fa-spinner fa-spin fa-2xl"
+                        style="color: var(--primary); margin-bottom: 16px;"></i>
+                    <p style="font-weight: 500; color: var(--outline);">Booting AssetFlow ERP...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Generic Modal Overlay Container -->
+    <div class="modal-overlay" id="modal-container-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="global-modal-title">Modal Title</h3>
+                <button class="modal-close" id="global-modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="global-modal-body-content">
+                <!-- Injected Form or Info -->
+            </div>
+            <div class="modal-footer" id="global-modal-footer-actions">
+                <button class="btn btn-outline" id="global-modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="global-modal-submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- App Orchestration Script -->
+    <script type="module" src="/static/js/app.js"></script>
+</body>
+
+</html>
