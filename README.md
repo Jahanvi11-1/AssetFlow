@@ -91,8 +91,9 @@ Create a virtual environment and install the required Python packages:
 python -m venv venv
 .\venv\Scripts\activate
 
-# Install dependencies
-pip install fastapi uvicorn sqlalchemy asyncpg pydantic passlib bcrypt python-jose python-multipart watchfiles
+# Install dependencies from requirement file
+```powershell
+pip install requirements.txt
 ```
 
 ### 3. Database Seeding
